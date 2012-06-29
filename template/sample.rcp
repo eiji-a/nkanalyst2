@@ -1,0 +1,25 @@
+year: 2012
+month: 7
+bunsekifile: "分析.xls"
+bunsekisheet: "7月分析"
+siten:
+  dai1:
+    name: "第一支店"
+    zitfile: "②24年度第一支店会議資料.xls"
+    zitsheet: "経理資料"
+    gaifile: "⑤会議資料集計用支店毎.xls"
+    gaisheet: "第一"
+  dai2:
+    name: "第二支店"
+    zitfile: "②24年度第二支店会議資料.xls"
+    zitsheet: "経理資料"
+    gaifile: "⑤会議資料集計用支店毎.xls"
+    gaisheet: "第二"
+  nktotal:
+    name: "NK合計"
+    outsheet: "NK合計"
+    sitenlist:
+      - dai1
+      - dai2
+
+
