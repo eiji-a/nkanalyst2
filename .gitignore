@@ -17,6 +17,13 @@ tmp
 _yardoc
 doc/
 
+#
+# LOCAL RULES
+#
+
+# for emacs
+*~
+
 # data files
 data/
 
