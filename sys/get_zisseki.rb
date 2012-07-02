@@ -90,6 +90,15 @@ def add_params(data, month)
   end
 end
 
+def set_zaiko_ruikei(data, mon)
+  data[RUIKEI]['kisyu'][0] = data['month07']['kisyu'][0]
+  data[RUIKEI]['kisyu'][1] = data['month07']['kisyu'][1]
+  data[RUIKEI]['kisyu'][2] = data['month07']['kisyu'][2]
+  data[RUIKEI]['kimatu'][0] = data['month' + mon]['kimatu'][0]
+  data[RUIKEI]['kimatu'][1] = data['month' + mon]['kimatu'][1]
+  data[RUIKEI]['kimatu'][2] = data['month' + mon]['kimatu'][2]
+end
+
 def calc_ruikei(data)
   data[RUIKEI] = Hash.new
   ZPARAMS.each do |zp|
@@ -103,6 +112,7 @@ def calc_ruikei(data)
     add_params(data, 'month' + m)
     break if m == mon
   end
+  set_zaiko_ruikei(data, mon)
 end
 
 def calc_zogen(data)
@@ -128,9 +138,9 @@ end
 
 def calc_gaisyukei(data)
   data['gaisyukei'] = Array.new
-  data['gaisyukei'][0] = data['gzassyunyu'][0] + data['gukerisoku'[0]
-  data['gaisyukei'][1] = data['gzassyunyu'][1] + data['gukerisoku'[1]
-  data['gaisyukei'][2] = data['gzassyunyu'][2] + data['gukerisoku'[2]
+  data['gaisyukei'][0] = data['gzassyunyu'][0] + data['gukerisoku'][0]
+  data['gaisyukei'][1] = data['gzassyunyu'][1] + data['gukerisoku'][1]
+  data['gaisyukei'][2] = data['gzassyunyu'][2] + data['gukerisoku'][2]
 end
 
 def calc_gaisonkei(data)
@@ -142,10 +152,16 @@ end
 
 def calc_sonekikei(data)
   data['sonekikei'] = Array.new
+  data['sonekikei'][0] = data['gaisyukei'][0] - data['gaisonkei'][0]
+  data['sonekikei'][1] = data['gaisyukei'][1] - data['gaisonkei'][1]
+  data['sonekikei'][2] = data['gaisyukei'][2] - data['gaisonkei'][2]
 end
 
 def calc_keizyori(data)
   data['keizyori'] = Array.new
+  data['keizyori'][0] = data['eiri'][0] + data['gaisyukei'][0] - data['gaisonkei'][0] + data['zeimodori'][0]
+  data['keizyori'][1] = data['eiri'][1] + data['gaisyukei'][1] - data['gaisonkei'][1] + data['zeimodori'][1]
+  data['keizyori'][2] = data['eiri'][2] + data['gaisyukei'][2] - data['gaisonkei'][2] + data['zeimodori'][2]
 end
 
 def calc_additionals(data)

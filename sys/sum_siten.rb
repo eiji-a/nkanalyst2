@@ -6,7 +6,7 @@ require 'yaml'
 MONTHS = ['07', '08', '09', '10', '11', '12', '01', '02', '03', '04', '05', '06']
 PARAMS = ['uriage', 'siire', 'sitenkan', 'kisyu', 'kimatu', 'keihi',
           'zassyunyu', 'gzassyunyu', 'gukerisoku', 'siharisoku',
-          'zason', 'zeimodori']
+          'zason', 'zeimodori', 'zogen', 'arari', 'eiri', 'gaisyukei', 'gaisonkei', 'sonekikei', 'keizyori']
 RUIKEI = 'ruikei'
 
 def read_recipe
