@@ -177,6 +177,29 @@ def calc_additionals(data)
   end
 end
 
+def calc_eirikei(data)
+  eirikei = [0.0, 0.0, 0.0]
+  mon = sprintf("%02d", $RECIPE['month'])
+  MONTHS.each do |m|
+    month = 'month' + m
+    eirikei[0] += data[month]['eiri'][0]
+    eirikei[1] += data[month]['eiri'][1]
+    eirikei[2] += data[month]['eiri'][2]
+    data[month]['eirikei'] = Array.new
+    data[month]['eirikei'][0] = eirikei[0]
+    data[month]['eirikei'][1] = eirikei[1]
+    data[month]['eirikei'][2] = eirikei[2]
+  end
+end
+
+def set_cashflow(data)
+  data[RUIKEI]['eirikei'] = Array.new
+  data[RUIKEI]['eirikei'][0] = data[RUIKEI]['eiri'][0] - data[RUIKEI]['zogen'][0]
+  data[RUIKEI]['eirikei'][1] = data[RUIKEI]['eiri'][1] - data[RUIKEI]['zogen'][1]
+  data[RUIKEI]['eirikei'][2] = data[RUIKEI]['eiri'][2] - data[RUIKEI]['zogen'][2]
+
+end
+
 def gen_siten(name, para)
   puts "NAME:" + name
   puts para
@@ -189,6 +212,8 @@ def gen_siten(name, para)
     read_month_gai(para['gaifile'], para['gaisheet'], siten_dat)
     calc_ruikei(siten_dat)
     calc_additionals(siten_dat)
+    calc_eirikei(siten_dat)
+    set_cashflow(siten_dat)
     fp.puts(siten_dat.to_yaml)
   end
 end
